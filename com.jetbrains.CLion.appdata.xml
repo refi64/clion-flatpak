@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.jetbrains.CLion</id>
+  <metadata_license>CC-BY-SA</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <name>CLion</name>
+  <summary>A cross-platform IDE for C and C++</summary>
+  <description>
+    <p>Thanks to native C and C++ support, including modern C++ standards, libc++ and
+    Boost, CLion knows your code through and through and takes care of the routine
+    while you focus on the important things.
+    </p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by JetBrains s.r.o.</p>
+  </description>
+  <url type="bugtracker">https://youtrack.jetbrains.com/</url>
+  <url type="help">https://www.jetbrains.com/help/clion/</url>
+  <url type="homepage">http://www.jetbrains.com/clion/</url>
+  <launchable type="desktop-id">com.jetbrains.CLion.desktop</launchable>
+  <developer_name>JetBrains s.r.o.</developer_name>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://www.jetbrains.com/clion/img/screens/overview__full-ide-screen.png</image>
+    </screenshot>
+  </screenshots>
+  <update_contact>rymg19@gmail.com</update_contact>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="2019.3.3" date="2020-01-21"/>
+  </releases>
+</component>

@@ -1,0 +1,59 @@
+app-id: com.jetbrains.CLion
+command: clion-desktop
+runtime: org.freedesktop.Sdk
+runtime-version: '19.08'
+sdk: org.freedesktop.Sdk
+separate-locales: false
+tags:
+  - proprietary
+finish-args:
+  - --allow=devel
+  - --device=dri
+  - --env=CLION_JDK=/app/extra/clion/jre64
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=pulseaudio
+  - --socket=ssh-auth
+  - --socket=wayland
+  - --socket=x11
+  - --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.secrets
+modules:
+  - name: clion
+    buildsystem: simple
+    build-commands:
+      - unzip clion_logos.zip
+      - install -D apply_extra /app/bin/apply_extra
+      - install -D -m755 clion-desktop.sh ${FLATPAK_DEST}/bin/clion-desktop
+      - install -D -m644 icon_CLion.svg ${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
+      - install -D -m644 -t ${FLATPAK_DEST}/share/applications/ ${FLATPAK_ID}.desktop
+      - install -D -m644 -t ${FLATPAK_DEST}/share/metainfo/ ${FLATPAK_ID}.appdata.xml
+    sources:
+      - type: script
+        commands:
+          - mkdir clion/
+          - tar -xzf clion.tar.gz --directory=clion/ --strip-components=1
+          - rm clion.tar.gz
+        dest-filename: apply_extra
+      - type: script
+        commands:
+          - JAVA_TOOL_OPTIONS=-Djava.io.tmpdir=${XDG_CACHE_HOME}/tmp/
+          - export JAVA_TOOL_OPTIONS
+          - TMPDIR=${XDG_CACHE_HOME}/tmp/
+          - export TMPDIR
+          - exec env /app/extra/clion/bin/clion.sh "$@"
+        dest-filename: clion-desktop.sh
+      - type: file
+        sha256: a3b4d3dd984fdcc72e8cc576202dfbe1c471d8a02a05494c2eb3bb0c35f3761c
+        url: https://resources.jetbrains.com/storage/products/clion/docs/clion_logos.zip
+      - type: file
+        path: com.jetbrains.CLion.desktop
+      - type: file
+        path: com.jetbrains.CLion.appdata.xml
+      - type: extra-data
+        filename: clion.tar.gz
+        sha256: 3c12a827bedf5ecc0d6c9aaf6822bb849f53798e5fd48e3f7ef975b4aa5976b7
+        size: 505265765
+        url: https://download-cf.jetbrains.com/cpp/CLion-2019.3.3.tar.gz
